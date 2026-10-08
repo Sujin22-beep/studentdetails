@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT DETAILS</title>
+</head>
+
+<body>
+    <style>
+        button {
+            background-color: aquamarine;
+        }
+
+        fieldset {
+            width: 18%;
+            padding: 5px;
+            margin: 5px;
+            border: solid black 1px;
+            border-radius: 5px;
+        }
+
+        .table2 {
+            width: 30%;
+        }
+    </style>
+    <center>
+        <h1>STUDENT FORM</h1>
+        <DIV>
+            <fieldset>
+                <table border="2" class="container">
+                    <thead>
+                        <tr>
+                            <th>Name:</th>
+                            <td><input type="text" placeholder="Enter your name" id="name"></td>
+                        </tr>
+                        <tr>
+                            <th>Age:</th>
+                            <td><input type="number" placeholder="Enter your age" id="age"></td>
+                        </tr>
+                        <tr>
+                            <th>Gender:</th>
+                            <td><input type="radio" name="Gender" value="Male"> Male
+                                <input type="radio" name="Gender" value="Female"> Female
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Course:</th>
+                            <td><select id="course">
+                                    <option>Python programming</option>
+                                    <option>javascript</option>
+                                    <option>c++</option>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <th>E-mail:</th>
+                            <td><input type="text" placeholder="Enter your e-mail id" id="e-mail"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button style="width:100%" id="btn">save</button></td>
+                        </tr>
+                    </thead>
+                </table>
+            </fieldset>
+        </DIV>
+        <table border="2" class="table2">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Course</th>
+                    <th>E-mail</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+            </tbody>
+        </table>
+    </center>
+    <script>
+        var names = document.getElementById("name")
+        var age = document.getElementById("age")
+        var course = document.getElementById("course")
+        var email = document.getElementById("e-mail")
+        var btn = document.getElementById("btn")
+        var table2 = document.querySelector(".table2")
+        var container = document.querySelector("container")
+        var tablebody = document.getElementById("tablebody")
+
+        btn.addEventListener("click", function () {
+
+            var Gender = document.querySelector('input[name="Gender"]:checked');
+            if (
+                names.value == "" ||
+                age.value == "" ||
+                Gender.value == null ||
+                email.value == "") {
+                alert("Enter all the details")
+            }
+            var row = document.createElement("tr")
+
+            row.innerHTML = `
+                <td>${names.value}</td>
+                <td>${age.value}</td>
+                <td>${Gender.value}</td>
+                <td>${course.value}</td>
+                <td>${email.value}</td>
+                <td>
+                    <button onclick="deleteRow(this)" style="background-color: red">Delete</button>
+                </td>
+            `;
+            tablebody.append(row)
+            names.value = "";
+            age.value = "";
+            Gender.checked = null;
+            email.value = ""
+
+        })
+        function deleteRow(button) {
+            button.parentElement.parentElement.remove()
+
+        }
+
+    </script>
+</body>
+
+</html>
